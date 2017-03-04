@@ -10,12 +10,7 @@ var hash = function(input){
 
 app.use('/', express.static(__dirname + '/static'))
 
-var device_config = {
-  'light0': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.64'} },
-  'light1': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.106'} },
-  'light2': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.197'} },
-  'light3': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.179'} }
-};
+var device_config = require('./config.json');
 
 var drivers = {}
 var devices = {};

@@ -1,0 +1,6 @@
+{
+  "light0": { "driver": "lifx", "params" : {"ip": "192.168.1.197"} },
+  "light1": { "driver": "lifx", "params" : {"ip": "192.168.1.198"} },
+  "light2": { "driver": "lifx", "params" : {"ip": "192.168.1.199"} },
+  "light3": { "driver": "lifx", "params" : {"ip": "192.168.1.200"} }
+}

@@ -16,7 +16,6 @@ function LifxLight(ip) {
     }
   }
 
-  var attrs = {'color': 'hsbk', 'power': 'binary'};
   var state = {'color': [0, 0, 0, 0], 'power': 0};
 
   var _light = null;
