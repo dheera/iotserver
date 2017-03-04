@@ -39,6 +39,7 @@ setInterval(function() {
       webdevices[id] = {
         'deviceType': device.deviceType,
         'properties': device.properties,
+        'label': device_config[id].label,
         'state': state
       };
   }

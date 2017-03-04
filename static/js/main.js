@@ -20,8 +20,10 @@ socket.on('devices', function(data) {
     if(id in device_controls) {
       device_controls[id].update(devices[id]['state']);
     } else {
-      device_controls[id] = new LifxLight(id, id, devices[id]['state']);
-      $('.devices').append(device_controls[id].getUI());
+      if(devices[id]['deviceType'] === 'LifxLight') {
+        device_controls[id] = new LifxLight(id, devices[id]['label'], devices[id]['state']);
+        $('.devices').append(device_controls[id].getUI());
+      }
       componentHandler.upgradeAllRegistered();
     }
   }

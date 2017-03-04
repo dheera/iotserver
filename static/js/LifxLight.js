@@ -1,13 +1,13 @@
-function LifxLight(name, device_id, state) {
+function LifxLight(device_id, label, state) {
 
   var d = $('<div></div>');
   d.addClass('device');
   d.addClass('device-' + device_id);
-  d.data('name', name);
+  d.data('name', label);
   d.data('device_id', device_id);
   d.data('state', state);
 
-  d_title = $('  <div class="device-title">' + name + '</div>');
+  d_title = $('  <div class="device-title">' + label + '</div>');
 
   d_actions = $('<div class="device-actions"></div>');
 
