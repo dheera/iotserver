@@ -2,8 +2,10 @@
 
 # aggressively re-run script in case of bugs
 
+some_node = `which nodejs || which node`
+
 while true
 do
-  nodejs `dirname $0`/main.js
+  $some_node `dirname $0`/iotserver.js
   sleep 2
 done
