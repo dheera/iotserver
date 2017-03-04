@@ -9,11 +9,6 @@ var hash = function(input){
 
 app.use('/', express.static(__dirname + '/static'))
 
-
-var drivers = {
-  'lifx': require('./drivers/lifx.js')
-}
-
 var device_config = {
   'light0': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.64'} },
   'light1': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.106'} },
@@ -21,11 +16,18 @@ var device_config = {
   'light3': { 'driver': 'lifx', 'params' : {'ip': '192.168.1.179'} }
 };
 
+var drivers = {}
 var devices = {};
 var webdevices = {};
 
 for(id in device_config) {
-  device = drivers[device_config[id]['driver']](device_config[id]['params'])
+  driver_name = device_config[id]['driver'];
+  params = device_config[id]['params'];
+  if(!(driver_name in drivers)) {
+    console.log("Loading driver " + driver_name + "...");
+    drivers[driver_name] = require('./drivers/' + driver_name + '.js');
+  }
+  device = drivers[driver_name](params);
   devices[id] = device;
 }
 
