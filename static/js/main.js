@@ -21,10 +21,15 @@ socket.on('devices', function(data) {
       device_controls[id].update(devices[id]['state']);
     } else {
       if(devices[id]['deviceType'] === 'LifxLight') {
-        device_controls[id] = new LifxLight(id, devices[id]['label'], devices[id]['state']);
-        $('.devices').append(device_controls[id].getUI());
+        var div = $('<div></div>');
+        $('.devices').append(div);
+        device_controls[id] = new LifxLight(id, devices[id]['label'], devices[id]['state'], div);
+      } else if(devices[id]['deviceType'] === 'Kankun') {
+        var div = $('<div></div>');
+        $('.devices').append(div);
+        device_controls[id] = new Kankun(id, devices[id]['label'], devices[id]['state'], div);
       }
-      componentHandler.upgradeAllRegistered();
+      // componentHandler.upgradeAllRegistered();
     }
   }
 });
