@@ -1,0 +1,59 @@
+body {
+  margin:0;
+  background:#f0f0f0;
+  font-family: 'Titillium Web', sans-serif;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.card {
+  font-family: 'Titillium Web', sans-serif;
+  background:#ffffff;
+  box-shadow: 4px 4px 4px rgba(192,192,192,0.4);
+  padding:15px;
+  margin:10px;
+}
+
+.card-title {
+  font-size:24pt;
+  color:#808080;
+  padding-top:5px;
+  padding-bottom:15px;
+}
+
+.device {
+  display: table;
+  table-layout:fixed;
+  width:100%;
+  min-height:50pt;
+}
+
+.device-header {
+  display:table-row;
+}
+
+.device-header-title {
+  display:table-cell;
+  font-size:14pt;
+  color:#808080;
+  margin:5pt;
+  padding-right:20px;
+  vertical-align:middle;
+}
+
+.device-header-actions {
+  display:table-cell;
+  margin:5pt;
+  vertical-align:middle;
+  text-align:right;
+}
+
+.device-settings {
+  display:table-row;
+}
+
+.device-settings-actions {
+  display:table-cell;
+  column-span:2;
+}

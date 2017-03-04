@@ -7,20 +7,19 @@ function Kankun(device_id, label, state, div) {
   ui.data('device_id', device_id);
   ui.data('state', state);
 
-  d_title = $('  <div class="device-title">' + label + '</div>');
+  d_header = $('<div class="device-row device-header"></div>').appendTo(ui);
+  d_header_title = $('  <div class="device-header-title">' + label + '</div>').appendTo(d_header);
+  d_header_actions = $('<div class="device-header-actions"></div>').appendTo(d_header);
 
-  d_actions = $('<div class="device-actions"></div>');
+  d_settings = $('<div class="device-row device-settings"></div>').appendTo(ui);
+  d_settings_actions = $('<div class="device-settings-actions"></div>').appendTo(d_settings);
 
   action  = $('<label class="property-power mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-' + device_id + '"><input type="checkbox" id="switch-' + device_id + '" class="mdl-switch__input" checked><span class="mdl-switch__label"></span></label>');
   action.find('input').bind('change', function() {
     deviceSet(device_id, 'power', this.checked ? 1 : 0);
   });
 
-  d_actions.append(action);
-
-  d_actions.append(action);
-  ui.append(d_title);
-  ui.append(d_actions);
+  d_header_actions.append(action);
 
   $(div).append(ui);
   componentHandler.upgradeAllRegistered();
