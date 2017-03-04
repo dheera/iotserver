@@ -13,6 +13,15 @@ socket.on('connect', function() {
   console.log('connected');
 });
 
+socket.on('authResult', function(data) {
+  if(data === 1) {
+    console.log("authentication successful");
+    $('#auth').hide();
+  } else {
+    console.log("authentication failed");
+  }
+});
+
 socket.on('devices', function(data) {
   console.log(data);
   devices = data;
@@ -36,5 +45,8 @@ socket.on('devices', function(data) {
 
 $(function() {
   console.log("init");
-
+  $('#auth-login').click(function() {
+    auth_params = {"username": $('#auth-username').val(), "password": $('#auth-password').val()};
+    socket.emit('auth', auth_params);
+  });
 });
