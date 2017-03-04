@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# aggressively re-run script in case of bugs
+
+while true
+do
+  nodejs `dirname $0`/main.js
+  sleep 2
+done
