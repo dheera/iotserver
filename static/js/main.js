@@ -1,7 +1,9 @@
-var webdevices;
 var socket;
 
-function set(id, property, value) {
+var devices = {};
+var device_controls = {};
+
+function deviceSet(id, property, value) {
   socket.emit('set', [id, property, value]);
 }
 
@@ -12,18 +14,15 @@ socket.on('connect', function() {
 });
 
 socket.on('devices', function(data) {
-  console.log('devices:', data)
+  console.log(data);
   devices = data;
   for(id in devices) {
-    if($('.device-' + id).length === 0) {
-      deviceHTML = $('<div></div>').addClass('device').addClass('device-' + id).data('device_id', id);
-      $('<button>on</button>').click(function() {
-        set($(this).parents('.device').data('device_id'), 'power', 1);
-      }).appendTo(deviceHTML);
-      $('<button>off</button>').click(function() {
-        set($(this).parents('.device').data('device_id'), 'power', 0);
-      }).appendTo(deviceHTML);
-      $('.devices').append(deviceHTML);
+    if(id in device_controls) {
+      device_controls[id].update(devices[id]['state']);
+    } else {
+      device_controls[id] = new LifxLight(id, id, devices[id]['state']);
+      $('.devices').append(device_controls[id].getUI());
+      componentHandler.upgradeAllRegistered();
     }
   }
 });

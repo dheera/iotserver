@@ -32,9 +32,10 @@ for(id in device_config) {
 }
 
 setInterval(function() {
+  var id;
   webdevices = {};
   for(id in devices) {
-      device = devices[id];
+      var device = devices[id];
       var state = {};
       Object.keys(device.properties).forEach(function(key) {
         state[key] = device[key];
@@ -45,14 +46,32 @@ setInterval(function() {
         'state': state
       };
   }
-}, 1000);
+}, 100);
 
 io.of('/iot/v0/').on('connection', function(socket){
+  var id, property;
   console.log('connected', socket.id);
+
+  var webdevices_last = {};
   setInterval(function() {
-    socket.emit('devices', webdevices);
-  }, 1000);
+    var id;
+    var webdevices_update = {};
+    for(id in webdevices) {
+      if(!(id in webdevices_last)) {
+        webdevices_update[id] = webdevices[id];
+      } else {
+        if(JSON.stringify(webdevices[id]) !== webdevices_last[id]) {
+          webdevices_update[id] = webdevices[id]
+        }
+      }
+      webdevices_last[id] = JSON.stringify(webdevices[id]);
+    }
+    if(Object.keys(webdevices_update).length > 0) {
+      socket.emit('devices', webdevices_update);
+    }
+  }, 100);
   socket.on('set', function(data) {
+    console.log('set', data);
     if(data && data.length === 3) {
       if(data[0] in devices) {
         if(data[1] in devices[data[0]].properties) {

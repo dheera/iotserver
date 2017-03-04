@@ -19,19 +19,21 @@ function LifxLight(ip) {
   var attrs = {'color': 'hsbk', 'power': 'binary'};
   var state = {'color': [0, 0, 0, 0], 'power': 0};
 
-  var _light = client.light(ip);
+  var _light = null;
 
   setInterval(function(_this) {
     if(!_light) {
       _light = client.light(ip);
-    }
-    _light.getState(function(error, data) {
-      if(data) {
-        state['color'] = [data['color']['hue'], data['color']['saturation'], data['color']['brightness'], data['color']['kelvin']];
-        state['power'] = data['power'];
-        
+      if(_light) {
+        _light.getState(function(error, data) {
+          if(!error && data) {
+            console.log(data);
+            state['color'] = [data['color']['hue'], data['color']['saturation'], data['color']['brightness'], data['color']['kelvin']];
+            state['power'] = data['power'] ? 1:0;
+          }
+        });
       }
-    });
+    }
   }, 500, this);
 
   Object.defineProperty(this, 'power', {
@@ -44,8 +46,10 @@ function LifxLight(ip) {
       if(!_light) return;
       if(value) {
         _light.on();
+        state['power'] = 1;
       } else {
         _light.off();
+        state['power'] = 0;
       }
     }
   });
@@ -59,6 +63,7 @@ function LifxLight(ip) {
       if(!_light) return;
       if(value) {
         _light.color(value[0], value[1], value[2], value[3]);
+        state['color'] = value;
       }
     }
   });
