@@ -1,3 +1,6 @@
 *.swp
+*~
 node-modules
+node-modules/
 */node-modules
+*/node-modules/
