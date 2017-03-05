@@ -80,6 +80,7 @@ body {
 
 .device-settings {
   display:table-row;
+  display:none;
 }
 
 .device-settings-actions {
