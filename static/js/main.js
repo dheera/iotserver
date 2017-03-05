@@ -37,8 +37,11 @@ socket.on('devices', function(data) {
         var div = $('<div></div>');
         $('.devices').append(div);
         device_controls[id] = new Kankun(id, devices[id]['label'], devices[id]['state'], div);
+      } else if(devices[id]['deviceType'] === 'ArduinoLock') {
+        var div = $('<div></div>');
+        $('.devices').append(div);
+        device_controls[id] = new ArduinoLock(id, devices[id]['label'], devices[id]['state'], div);
       }
-      // componentHandler.upgradeAllRegistered();
     }
   }
 });
