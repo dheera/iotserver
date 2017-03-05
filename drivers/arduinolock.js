@@ -10,7 +10,7 @@ function ArduinoLock(ip) {
     } 
   }
 
-  var state = {'locked': 0};
+  var state = {'locked': 1};
 
   Object.defineProperty(this, 'locked', {
     get: function() {
