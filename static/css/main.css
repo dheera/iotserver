@@ -1,6 +1,6 @@
 body {
   margin:0;
-  background:#f0f0f0;
+  background:#000000;
   font-family: 'Titillium Web', sans-serif;
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -36,6 +36,8 @@ body {
   margin:5pt;
 }
 
+
+
 .card {
   font-family: 'Titillium Web', sans-serif;
   background:#ffffff;
@@ -55,7 +57,7 @@ body {
   display: table;
   table-layout:fixed;
   width:100%;
-  min-height:50pt;
+  border-bottom:1px solid #808080;
 }
 
 .device-header {
@@ -80,10 +82,59 @@ body {
 
 .device-settings {
   display:table-row;
-  display:none;
 }
 
 .device-settings-actions {
   display:table-cell;
   column-span:2;
+}
+
+.device-lifxlight-header {
+  height:40pt;width:100%;
+}
+
+.device-lifxlight-header button {
+  font-family: 'Titillium Web', sans-serif;
+  width:100%;height:100%;
+  font-size:20pt;
+  color:#ffffff;
+  background:#404040;
+  border:0;
+  margin:0;
+}
+.device-lifxlight-header button.is-on {
+  background:#0080cc;
+}
+
+.device-kankun-header {
+  height:40pt;width:100%;
+}
+.device-kankun-header button {
+  font-family: 'Titillium Web', sans-serif;
+  width:100%;height:100%;
+  font-size:20pt;
+  color:#ffffff;
+  background:#404040;
+  border:0;
+  margin:0;
+}
+.device-kankun-header button.is-on {
+  background:#0080cc;
+}
+
+.device-arduinolock-header {
+  height:40pt;width:100%;
+}
+
+.device-arduinolock-header button {
+  font-family: 'Titillium Web', sans-serif;
+  width:100%;height:100%;
+  font-size:20pt;
+  color:#ffffff;
+  background:#404040;
+  border:0;
+  margin:0;
+}
+.device-arduinolock-header button.is-on {
+  background:#0080cc;
 }
