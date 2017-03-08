@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 body {
   margin:0;
   background:#000000;
@@ -14,6 +18,8 @@ body {
   background:#303030;
   color:#ffffff;
   text-align:center;
+  font-size:14pt;
+  padding-top:20pt;
 }
 
 #auth div {
@@ -22,14 +28,14 @@ body {
 
 #auth input {
   border:0;
-  font-size:14pt;
+  font-size:16pt;
   padding:8pt;
   margin:5pt;
 }
 
 #auth button {
   background:#0080cc;
-  font-size:14pt;
+  font-size:16pt;
   color:#ffffff;
   border:0;
   padding:10pt;
@@ -57,7 +63,7 @@ body {
   display: table;
   table-layout:fixed;
   width:100%;
-  border-bottom:1px solid #808080;
+  border-bottom:2pt solid #000000;
 }
 
 .device-header {

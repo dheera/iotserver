@@ -11,7 +11,18 @@ socket = io('/iot/v0/').connect('//' + document.domain + ':' + location.port);
 
 socket.on('connect', function() {
   console.log('connected');
+  if(auth_params) {
+    socket.emit('auth', auth_params);
+  }
 });
+
+socket.on('reconnect', function() {
+  console.log('connected');
+  if(auth_params) {
+    socket.emit('auth', auth_params);
+  }
+});
+
 
 socket.on('authResult', function(data) {
   if(data === 1) {
@@ -19,6 +30,7 @@ socket.on('authResult', function(data) {
     $('#auth').hide();
   } else {
     console.log("authentication failed");
+    auth_params = null;
   }
 });
 
@@ -45,6 +57,8 @@ socket.on('devices', function(data) {
     }
   }
 });
+
+var auth_params = null;
 
 $(function() {
   console.log("init");
