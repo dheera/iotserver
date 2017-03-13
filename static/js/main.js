@@ -27,9 +27,11 @@ socket.on('reconnect', function() {
 socket.on('authResult', function(data) {
   if(data === 1) {
     console.log("authentication successful");
+    localStorage.setItem("auth_params", JSON.stringify(auth_params));
     $('#auth').hide();
   } else {
     console.log("authentication failed");
+    localStorage.removeItem("auth_params");
     auth_params = null;
   }
 });
@@ -59,6 +61,15 @@ socket.on('devices', function(data) {
 });
 
 var auth_params = null;
+
+var auth_params_stored = localStorage.getItem("auth_params");
+if(auth_params_stored) {
+  try {
+    auth_params = JSON.parse(auth_params_stored);
+  } catch(err) {
+    localStorage.removeItem("auth_params");
+  }
+}
 
 $(function() {
   console.log("init");
