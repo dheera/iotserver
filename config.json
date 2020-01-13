@@ -1,5 +1,6 @@
 {
-  "lock0": { "label": "Front Door", "driver": "arduinolock", "params" : {"ip": "192.168.1.193"} },
+  "lock0": { "label": "Front Door", "driver": "ESP8266Lock", "params" : {"ip": "192.168.1.202"} },
+  "thermostat0": { "label": "Thermostat", "driver": "ESP8266Thermostat", "params" : {"ip": "192.168.1.201"} },
   "light0": { "label": "Table", "driver": "lifx", "params" : {"ip": "192.168.1.197"} },
   "light1": { "label": "Bathroom", "driver": "lifx", "params" : {"ip": "192.168.1.198"} },
   "light2": { "label": "Kitchen 0", "driver": "lifx", "params" : {"ip": "192.168.1.199"} },
