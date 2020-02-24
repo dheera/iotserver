@@ -55,6 +55,14 @@ socket.on('devices', function(data) {
         var div = $('<div></div>');
         $('.devices').append(div);
         device_controls[id] = new ArduinoLock(id, devices[id]['label'], devices[id]['state'], div);
+      } else if(devices[id]['deviceType'] === 'ESP8266Lock') {
+        var div = $('<div></div>');
+        $('.devices').append(div);
+        device_controls[id] = new ESP8266Lock(id, devices[id]['label'], devices[id]['state'], div);
+      } else if(devices[id]['deviceType'] === 'ESP8266Thermostat') {
+        var div = $('<div></div>');
+        $('.devices').append(div);
+        device_controls[id] = new ESP8266Thermostat(id, devices[id]['label'], devices[id]['state'], div);
       }
     }
   }

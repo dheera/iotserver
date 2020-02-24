@@ -7,6 +7,13 @@ function LifxLight(ip) {
 
   this.deviceType = 'LifxLight';
 
+  let that = this;
+
+  this.actions = {
+    "on": function() { that.power = 1; },
+    "off": function() { that.power = 0; }
+  }
+
   this.properties = {
     'power': {
       'type': 'binary'
@@ -61,7 +68,11 @@ function LifxLight(ip) {
     set: function(value) {
       if(!_light) return;
       if(value) {
-        _light.color(value[0], value[1], value[2], value[3]);
+        try {
+          _light.color(value[0], value[1], value[2], value[3]);
+        } catch(err) {
+          console.log(err);
+        }
         state['color'] = value;
       }
     }

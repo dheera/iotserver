@@ -144,3 +144,37 @@ body {
 .device-arduinolock-header button.is-on {
   background:#0080cc;
 }
+
+.device-ESP8266Lock-header {
+  height:40pt;width:100%;
+}
+
+.device-ESP8266Lock-header button {
+  font-family: 'Titillium Web', sans-serif;
+  width:100%;height:100%;
+  font-size:20pt;
+  color:#ffffff;
+  background:#404040;
+  border:0;
+  margin:0;
+}
+.device-ESP8266Lock-header button.is-on {
+  background:#0080cc;
+}
+
+.device-ESP8266Thermostat-header {
+  height:40pt;width:100%;
+}
+
+.device-ESP8266Thermostat-header button {
+  font-family: 'Titillium Web', sans-serif;
+  width:100%;height:100%;
+  font-size:20pt;
+  color:#ffffff;
+  background:#404040;
+  border:0;
+  margin:0;
+}
+.device-ESP8266Thermostat-header button.is-on {
+  background:#0080cc;
+}

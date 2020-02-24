@@ -9,6 +9,8 @@ module.exports = function() {
     console.log("slack request");
     console.log(req.body);
 
+    let responseText = "";
+
     if(!process.env.SLACK_VERIFICATION_TOKEN == req.body.token) {
       console.log("unauthorized request");
       res.send("unauthorized request");
@@ -23,33 +25,53 @@ module.exports = function() {
 
     tokens = req.body.text.split(" ");
     console.log(tokens);
-
-    if(tokens.length < 2 || tokens.length > 3) {
-      console.log("bad input");
-      res.send("bad input");
-      return;
+    
+    if(tokens.length === 0) {
+      errorText = "bad input";
+      console.log(errorText); res.send(errorText); return;
+    }
+    if(tokens[0] === "help") {
+      errorText = "help text here";
+      console.log(errorText); res.send(errorText); return;
     }
 
-    let responseText = "";
+    _id = tokens[0];
 
-    if(tokens.length === 2) {
-      _id = tokens[0];
-      _property = tokens[1];
-      if(!(_id in devices.devices)) {
-        responseText = "no device called " + _id;
-      } else {
-        if(!(_property in devices.devices[_id].properties)) {
-          responseText = "no property called " + _property;
-        }
-        responseText = _id + "." + _property + " = " + devices.devices[_id][_property];
+    if(!(_id in devices.devices)) {
+      errorText = "no device called " + _id + " ... for help try /dheera help";
+      console.log(errorText); res.send(errorText); return;
+    }
+
+    if(tokens.length === 1) {
+      errorText = _id + " = " + devices.devices[_id].toString();
+      console.log(errorText); res.send(errorText); return;
+    }
+
+    if(tokens[1] === "get") {
+      if(tokens.length === 2) {
+        errorText = "usage: /dheera [deviceName] get [propertyName]";
+        console.log(errorText); res.send(errorText); return;
       }
-    } else if(tokens.length === 3) {
-      _id = tokens[0];
-      _property = tokens[1];
-      _value = tokens[2];
+
+      _property = tokens[2];
+
+      if(!(_property in devices.devices[_id].properties)) {
+        errorText = "no property called " + _property;
+        console.log(errorText); res.send(errorText); return;
+      }
+
+      responseText = _id + "." + _property + " = " + devices.devices[_id][_property];
+      console.log(_property, responseText);
+    } else if(tokens[1] in devices.devices[_id].actions) {
+      devices.devices[_id].actions[tokens[1]]();
+      responseText = _id + " -> " + tokens[1];
+    } else {
+        errorText = "invalid action";
+        console.log(errorText); res.send(errorText); return;
     }
 
     response = {
+      "response_type": "ephemeral",
       "blocks": [
          {
            "type": "section",
@@ -60,16 +82,8 @@ module.exports = function() {
          }
       ]
     };
+    console.log(responseText, response);
     res.json(response);
-    // res.send(responseText);
 
-/*    request.post('https://slack.com/api/chat.postMessage', data, function (error, response, body) {
-      // Sends welcome message
-      res.json();
-    });
-
-*/
-
-    // next();
   };
 }
